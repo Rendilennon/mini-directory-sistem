@@ -1,5 +1,6 @@
 import sys
-from create import create_file, write_file
+from create import create_file
+from write import write_file
 from list import list_files
 from read import read_file
 from delete import delete_file
@@ -8,15 +9,15 @@ def main():
     print("=== SISTEM FILE MINI ===")
     print("PANDUAN KOMAND:")
     print("\"create <nama_file>\" - Membuat file baru")
+    print("\"write <nama_file> <konten>\" - Menulis/menimpa isi file")
+    print("\"read <nama_file>\" - Membaca isi file")
     print("\"ls\" - Menampilkan daftar file dan folder")
-    print("\"cat\" - Membaca isi file")
-    print("\"nano\" - Membuka teks editor nano untuk mengedit file")
-    print("\"rm\" - Menghapus file") 
+    print("\"rm <nama_file>\" - Menghapus file") 
     print("\"exit\" - Keluar dari program")
     
     while True:
         try:
-            command_input = input("\nuser@system:~$ ").strip().split()
+            command_input = input("\nuser@system:~$ ").strip().split(maxsplit=2)
 
             if not command_input:
                 continue
@@ -32,7 +33,7 @@ def main():
                     create_file(nama_file)
 
             # --- LOGIKA WRITE ---
-            elif perintah == "read" or perintah == "rd":
+            elif perintah == "write":
                 if len(command_input) < 2:
                     print("[INFO] Format: write <nama_file> <konten>")
                     print("[INFO] Contoh: write data.txt kelompok 3!")
@@ -41,18 +42,17 @@ def main():
                 else:
                     nama_file = command_input[1]
                     isi_konten = command_input[2]
-                    write_file(nama_file, isi_konten, mode='w')
+                    write_file(nama_file, isi_konten)
 
-            #--- LOGIKA READ ---
-            elif perintah == "read" :
-                if len(command_input) < 2 :
+            # --- LOGIKA READ ---
+            elif perintah == "read":
+                if len(command_input) < 2:
                     print("[INFO] Format: read <nama_file>")
                     print("[INFO] Contoh: read data.txt")
                 else:
-                    nama_file = command_input(i)
+                    nama_file = command_input[1]
                     read_file(nama_file)
 
-            
             # --- LOGIKA LIST ---
             elif perintah == "ls" or perintah == "list":
                 if len(command_input) >= 2:
@@ -65,14 +65,17 @@ def main():
             elif perintah == "rm":
                 if len(command_input) < 2:
                     print("[INFO] Format: rm <nama_file>")
+                    print("[INFO] Contoh: rm data.txt")
                 else:
-                    delete_file(command_input[1])
+                    nama_file = command_input[1]
+                    delete_file(nama_file)
 
             # --- KELUAR ---
             elif perintah == "exit":
                 print("Sistem dimatikan.")
                 break
             
+            # --- COMMAND TIDAK DIKENAL ---
             else:
                 print(f"[INFO] Perintah '{perintah}' belum tersedia atau salah ketik.")
 

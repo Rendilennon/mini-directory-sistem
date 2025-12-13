@@ -16,11 +16,7 @@ def read_file(nama_file):
         
         # Tampilkan isi file
         if isi.strip():
-            print(f"\n{'='*40}")
-            print(f"Isi file: {nama_file}")
-            print(f"{'='*40}")
             print(isi)
-            print(f"{'='*40}\n")
         else:
             print(f"[INFO] File '{nama_file}' kosong.")
         
