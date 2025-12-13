@@ -1,6 +1,7 @@
 import sys
-from create import create_file
+from create import create_file, write_file
 from list import list_files
+from read import read_file
 from delete import delete_file
 
 def main():
@@ -30,6 +31,28 @@ def main():
                     nama_file = command_input[1]
                     create_file(nama_file)
 
+            # --- LOGIKA WRITE ---
+            elif perintah == "read" or perintah == "rd":
+                if len(command_input) < 2:
+                    print("[INFO] Format: write <nama_file> <konten>")
+                    print("[INFO] Contoh: write data.txt kelompok 3!")
+                elif len(command_input) < 3:
+                    print("[INFO] Harap masukkan konten yang akan ditulis.")
+                else:
+                    nama_file = command_input[1]
+                    isi_konten = command_input[2]
+                    write_file(nama_file, isi_konten, mode='w')
+
+            #--- LOGIKA READ ---
+            elif perintah == "read" :
+                if len(command_input) < 2 :
+                    print("[INFO] Format: read <nama_file>")
+                    print("[INFO] Contoh: read data.txt")
+                else:
+                    nama_file = command_input(i)
+                    read_file(nama_file)
+
+            
             # --- LOGIKA LIST ---
             elif perintah == "ls" or perintah == "list":
                 if len(command_input) >= 2:
