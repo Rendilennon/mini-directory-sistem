@@ -1,6 +1,7 @@
 import sys
 from create import create_file
 from list import list_files
+from delete import delete_file
 
 def main():
     print("=== SISTEM FILE MINI ===")
@@ -35,7 +36,14 @@ def main():
                     path = command_input[1]
                     list_files(path)
                 else:
-                    list_files()  #
+                    list_files()
+
+            # --- LOGIKA DELETE ---
+            elif perintah == "rm":
+                if len(command_input) < 2:
+                    print("[INFO] Format: rm <nama_file>")
+                else:
+                    delete_file(command_input[1])
 
             # --- KELUAR ---
             elif perintah == "exit":
